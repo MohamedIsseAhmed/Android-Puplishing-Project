@@ -7,36 +7,32 @@ public class CollisonHandler : MonoBehaviour
     [SerializeField] private float lerpSpeed = 10f;
     [SerializeField] private float alligningSpeed = 10f;
     [SerializeField] private List<Transform> collectedObject = new List<Transform>();
-    public List<Transform> GetCollectedObjects
-    {
-        get
-        {
-            return collectedObject;
-        }
+    public List<Transform> GetCollectedObjects { get { return collectedObject; } }
 
+    int index = 0;
+    public static CollisonHandler instance;
+    private void Awake()
+    {
+        instance = this;
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Target")
         {
             CollectObject(other.transform);
-            print("COLLÝDED");
+           
             other.tag = "Untagged";
         }
     }
-    private void Update()
-    {
-        if (transform.position.x != 0)
-        {
-           // StartCoroutine(AllignWithThPlayer());
-        }
-    }
+  
     public void CollectObject(Transform targetTransform)
     {
         if (!collectedObject.Contains(targetTransform))
         {
+           
             targetTransform.parent = transform;
             collectedObject.Add(targetTransform);
+            
         }
         StartCoroutine(ScallingAndSnappingObjects());
     }

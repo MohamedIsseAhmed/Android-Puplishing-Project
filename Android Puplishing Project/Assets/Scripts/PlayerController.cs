@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour
     private Transform firstObject;
 
     CollisonHandler collisonHandler;
+
+    private bool stopped = false;
+    public bool IsStopped { get { return stopped; } set { stopped = value; } }   
     private void Awake()
     {
         collisonHandler = GetComponent<CollisonHandler>();
@@ -19,7 +22,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        InputHandling();
+        if(!GameManager.instance.pauseTheGame)
+             InputHandling();
     }
 
     private void InputHandling()
