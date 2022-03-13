@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7460491580883523879}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.244, y: 0.428, z: 57.63}
   m_LocalScale: {x: 2.022979, y: 0.6935, z: 0.09130621}
   m_Children: []
@@ -111,8 +111,8 @@ MonoBehaviour:
   balls: []
   data:
     courtNumber: 3
-    lerpSpeed: 5
-    waitTime: 1
+    lerpSpeed: 12
+    waitTime: 0.5
     courts:
     - {fileID: 0}
   lerpOffset: {x: 0, y: 5, z: 0}
@@ -122,17 +122,35 @@ MonoBehaviour:
     - serializedVersion: 3
       time: -0.0015487671
       value: -0.0047187805
-      inSlope: 2.0032325
-      outSlope: 2.0032325
+      inSlope: 4.124674
+      outSlope: 4.124674
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
+      time: 0.15249671
+      value: 0.6306686
+      inSlope: 2.593744
+      outSlope: 2.593744
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
       time: 0.5
       value: 1
-      inSlope: 0.0072167516
-      outSlope: 0.0072167516
+      inSlope: -0.218535
+      outSlope: -0.218535
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.8785995
+      value: 0.43214458
+      inSlope: -2.5267684
+      outSlope: -2.5267684
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -140,8 +158,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.9968872
       value: 0.011791229
-      inSlope: -1.988799
-      outSlope: -1.988799
+      inSlope: -3.5536528
+      outSlope: -3.5536528
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334

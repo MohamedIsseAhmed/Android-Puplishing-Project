@@ -27,7 +27,7 @@ public class BallManager : MonoBehaviour
                 lerpOffset.y = 4f;
             }
             lerpRatio=timer/data.lerpSpeed;
-            print("raetio" + lerpRatio);
+          
             lerpOffset=curve.Evaluate(lerpRatio)*lerpOffset;
         }
        
@@ -35,7 +35,7 @@ public class BallManager : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        print("COLLÝDED WÝTH"+other.name);
+       
         PlayerController controller = other.GetComponentInParent<PlayerController>();
          if (controller != null)
         {
@@ -59,11 +59,7 @@ public class BallManager : MonoBehaviour
             }
             
         }
-        print(balls.Count);
-        foreach(Transform t in balls)
-        {
-            print(t.name);
-        }
+      
     }
   
     private void MoveTheBall(Transform ball)
@@ -74,19 +70,16 @@ public class BallManager : MonoBehaviour
 
     IEnumerator MovetToTarget()
     {
-        int index=0;
+     
         for (int i = 0; i < balls.Count; i++)
         {
             balls[i].transform.position = Vector3.MoveTowards(balls[i].transform.position, data.courts[i].position, data.lerpSpeed * Time.deltaTime)+lerpOffset;
             yield return new WaitForSeconds(data.waitTime);
 
-            index += i;
-            print(index);
-            
         }
        
        
-        yield break;
+        yield return null;
         
     }
     [System.Serializable]

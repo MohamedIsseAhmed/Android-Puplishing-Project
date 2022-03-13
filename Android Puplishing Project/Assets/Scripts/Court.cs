@@ -7,7 +7,12 @@ public class Court : MonoBehaviour
 {
     [SerializeField] private GameObject goalParticle;
     [SerializeField] private float waitTime = 3;
-
+    private enum CourtType
+    {
+        InGameCourt,
+        FinishCourt
+    }
+    [SerializeField] private CourtType courtType;    
     public static event Action UnPaueTheGame;
     private void OnTriggerEnter(Collider other)
     {
@@ -17,12 +22,16 @@ public class Court : MonoBehaviour
     }
     IEnumerator DeactivateParentObject(Transform ball)
     {
-       
-        yield return new WaitForSeconds(waitTime);
-        this.transform.parent.gameObject.SetActive(false);
-        ball.transform.gameObject.SetActive(false);
-        goalParticle.SetActive(true);
+        if (!ball.CompareTag("Player")) 
+        {
 
-        UnPaueTheGame?.Invoke();
+            yield return new WaitForSeconds(waitTime);
+            this.transform.parent.gameObject.SetActive(false);
+            ball.transform.gameObject.SetActive(false);
+            goalParticle.SetActive(true);
+
+            UnPaueTheGame?.Invoke();
+        }
+       
     }
 }

@@ -77,17 +77,21 @@ public class CollisonHandler : MonoBehaviour
     }
     public IEnumerator AllignWithThPlayer()
     {
-        for (int i = 1; i <= collectedObject.Count - 1; i++)
+        if (collectedObject.Count >0)
         {
+            for (int i = 1; i <= collectedObject.Count - 1; i++)
+            {
 
-          
-            Vector3 desiredPosition =
-                 new Vector3(collectedObject[i - 1].localPosition.x, collectedObject[i].localPosition.y, collectedObject[i].localPosition.z);
-            collectedObject[i].transform.localPosition = Vector3.MoveTowards(collectedObject[i].transform.localPosition, desiredPosition, lerpSpeed * Time.deltaTime);
-            yield return new WaitForSeconds(alligningSpeed);  
 
-           //yield return null;
+                Vector3 desiredPosition =
+                     new Vector3(collectedObject[i - 1].localPosition.x, collectedObject[i].localPosition.y, collectedObject[i].localPosition.z);
+                collectedObject[i].transform.localPosition = Vector3.MoveTowards(collectedObject[i].transform.localPosition, desiredPosition, lerpSpeed * Time.deltaTime);
+                yield return new WaitForSeconds(alligningSpeed);
+
+                //yield return null;
+            }
         }
+        
        
     }
 

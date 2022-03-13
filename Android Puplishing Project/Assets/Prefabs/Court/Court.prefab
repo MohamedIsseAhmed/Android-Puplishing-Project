@@ -233,7 +233,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goalParticle: {fileID: 4218177374480996726}
-  waitTime: 2
+  waitTime: 0.5
+  courtType: 0
 --- !u!135 &3502475318904924094
 SphereCollider:
   m_ObjectHideFlags: 0
