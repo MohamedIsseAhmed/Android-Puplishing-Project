@@ -12,38 +12,34 @@ public class FinishPoint : MonoBehaviour
     [SerializeField] private Vector3 lerpOffset;
     [SerializeField] private List<Transform> courtsOnFinish = new List<Transform>();
     [SerializeField] private AnimationCurve curve;
+    [SerializeField] private LevelComplatedSo sO;
     private bool hasFinished = false;
 
     public static event Action FinishedEvent;
   
+    private void Awake()
+    {
+      
+    }
     private void Update()
     {
         if (hasFinished)
         {
-            StartCoroutine(GoToCourtOnFinish());
-            GameManager.instance.pauseTheGame = true;
+            GoToCourtOnFinish();
+            GameManager.Instance.pauseTheGame = true;
 
         }
+      
     }
     private void OnTriggerEnter(Collider other)
     {
-        GameManager.instance.pauseTheGame = true;
+        GameManager.Instance.pauseTheGame = true;
         hasFinished = true;
         FinishedEvent?.Invoke();
     }
-    private IEnumerator GoToCourtOnFinish()
+    private void GoToCourtOnFinish()
     {
-       
-        for(int i =0;i< CollisonHandler.instance.GetCollectedObjects.Count; i++)
-        {
-          
-            CollisonHandler.instance.GetCollectedObjects[i].parent = null;
-            CollisonHandler.instance.GetCollectedObjects[i].position =
-                Vector3.Lerp(CollisonHandler.instance.GetCollectedObjects[i].position, courtsOnFinish[i].position, lerpSpeed * Time.deltaTime);
-
-             yield return new WaitForSeconds(waitTime);
-        
-        }
-        
+        StartCoroutine(sO.GoToCourt(CollisonHandler.instance.GetCollectedObjects));
+      
     }
 }

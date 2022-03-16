@@ -60,9 +60,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lerpSpeed: 5
-  movemntSpeed: 8
-  maxXrange: 3.3
-  minXrange: -3.3
+  movemntSpeed: 5
+  maxXrange: 3.1
+  minXrange: -2
   xOffset: {x: 0, y: 0, z: 0}
 --- !u!54 &5230604039863780263
 Rigidbody:
@@ -93,5 +93,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lerpSpeed: 5
-  alligningSpeed: 0.09
+  alligningSpeed: 0.15
   collectedObject: []

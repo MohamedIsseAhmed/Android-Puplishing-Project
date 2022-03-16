@@ -39,7 +39,7 @@ public class BallManager : MonoBehaviour
         PlayerController controller = other.GetComponentInParent<PlayerController>();
          if (controller != null)
         {
-           GameManager.instance.pauseTheGame = true;
+            GameManager.Instance.pauseTheGame = true;
             FindObjectOfType<CollisonHandler>().AllignWithThPlayer();
             Transform objectcollidedwith = null;
             if (CollisonHandler.instance.GetCollectedObjects.Contains(other.transform))

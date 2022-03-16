@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float lerpSpeed = 5;
@@ -23,14 +24,15 @@ public class PlayerController : MonoBehaviour
     {
         collisonHandler = GetComponent<CollisonHandler>();
        rigidbody = GetComponent<Rigidbody>();
+       
     }
 
     void Update()
     {
-        if(!GameManager.instance.pauseTheGame)
+        if (GameManager.Instance.Failed) return;
+        if(!GameManager.Instance.pauseTheGame)
              InputHandling();
-        
-        print(transform.localPosition.x);
+
     }
 
     private void InputHandling()
