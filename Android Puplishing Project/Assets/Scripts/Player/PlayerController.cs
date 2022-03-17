@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class PlayerController : MonoBehaviour
@@ -32,7 +33,11 @@ public class PlayerController : MonoBehaviour
         if (GameManager.Instance.Failed) return;
         if(!GameManager.Instance.pauseTheGame)
              InputHandling();
-
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex+1);
+            LevelManager.Instance.ÝncreaseCurrentLevel();
+        }
     }
 
     private void InputHandling()

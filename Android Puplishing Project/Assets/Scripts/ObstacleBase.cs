@@ -17,8 +17,5 @@ public abstract class ObstacleBase:MonoBehaviour
     {
         myTween = transform.DOLocalMoveX(xTweenTarget, tweenDuration, false).SetLoops(infinityLoop, LoopType.Yoyo);
     }
-    public void Call()
-    {
-        print("called");
-    }
+  
 }

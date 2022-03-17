@@ -20,10 +20,12 @@ public class CylinderObstacle : ObstacleBase
 
     protected override void Start()
     {
-        xTweenTarget = 6.45f;
+        xTweenTarget = 8.71f;
         tweenDuration = 3;
         tweenDurationForBall = 1.75f;
         base.Start();
+        //TEST 
+        
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -35,8 +37,7 @@ public class CylinderObstacle : ObstacleBase
             othterTransform.DOLocalMoveX(-othterTransform.localPosition.x * 5, tweenDurationForBall, false);
      
            Check›fplayerChildCount?.Invoke();
-            //TEST 
-            Call();
+           
         }
         
     }
