@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singelton<GameManager>
 {
+    [SerializeField] private WaitForSeconds waitTime = new WaitForSeconds(1);
     public static GameManager instance;
 
     public bool pauseTheGame = false;
@@ -21,7 +22,7 @@ public class GameManager : Singelton<GameManager>
     protected override void Awake()
     {
         base.Awake();
-        print(Instance.GetType());
+      
       
        player = GameObject.FindGameObjectWithTag("Player").transform;
     
@@ -30,28 +31,31 @@ public class GameManager : Singelton<GameManager>
     {
         Court.UnPaueTheGame += Court_UnPaueTheGame;     
         CylinderObstacle.Check›fplayerChildCount += Obstacle_Check›fplayerChildCount;
+       BallManager.Check›fplayerChildCount+= Obstacle_Check›fplayerChildCount;
     }
 
     private void Obstacle_Check›fplayerChildCount()
     {
-        
-        if (player.transform.childCount == 0)
-        {        
-            OnFailed?.Invoke();
-            failed = true;  
-            return;
-        }
+
+        StartCoroutine(CheckPlayerChild());
     }
 
-    private void OnLevelComplated()
+    IEnumerator CheckPlayerChild()
     {
-        levelComplated = true;     
+        yield return waitTime;
+        if (player.transform.childCount == 0)
+        {
+            OnFailed?.Invoke();
+            failed = true;
+            yield break;
+        }
     }
 
     private void OnDisable()
     {
         Court.UnPaueTheGame -= Court_UnPaueTheGame;
-       
+        CylinderObstacle.Check›fplayerChildCount -= Obstacle_Check›fplayerChildCount;
+        BallManager.Check›fplayerChildCount -= Obstacle_Check›fplayerChildCount;
     }
 
     private void Court_UnPaueTheGame()

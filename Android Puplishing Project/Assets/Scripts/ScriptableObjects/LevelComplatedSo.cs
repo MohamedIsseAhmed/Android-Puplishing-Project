@@ -13,18 +13,18 @@ public class LevelComplatedSo : ScriptableObject
 
     public IEnumerator GoToCourt(List<Transform> playerBalls)
     {
-        for (int i = 0; i < playerBalls.Count; i++)
+        for (byte i = 0; i < playerBalls.Count; i++)
         {
-            CollisonHandler.instance.GetCollectedObjects[i].parent = null;
-            CollisonHandler.instance.GetCollectedObjects[i].position =
-                Vector3.Lerp(CollisonHandler.instance.GetCollectedObjects[i].position, FinishCourtsParent.GetChild(i).position, lerpSpeed * Time.deltaTime);
+            CollisonHandler.Instance.GetCollectedObjects[i].parent = null;
+            CollisonHandler.Instance.GetCollectedObjects[i].position =
+                Vector3.Lerp(CollisonHandler.Instance.GetCollectedObjects[i].position, FinishCourtsParent.GetChild(i).position+new Vector3(0,0.3f,0), lerpSpeed * Time.deltaTime);
 
             yield return new WaitForSeconds(waitTime);
+            
         } 
         OnlevelComplated?.Invoke(); 
     }
-    
-   
+
 }
 public enum UITypeOnFinish
 {

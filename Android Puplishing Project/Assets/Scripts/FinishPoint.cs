@@ -16,11 +16,7 @@ public class FinishPoint : MonoBehaviour
     private bool hasFinished = false;
 
     public static event Action FinishedEvent;
-  
-    private void Awake()
-    {
-      
-    }
+ 
     private void Update()
     {
         if (hasFinished)
@@ -39,7 +35,7 @@ public class FinishPoint : MonoBehaviour
     }
     private void GoToCourtOnFinish()
     {
-        StartCoroutine(sO.GoToCourt(CollisonHandler.instance.GetCollectedObjects));
+        StartCoroutine(sO.GoToCourt(CollisonHandler.Instance.GetCollectedObjects));
       
     }
 }

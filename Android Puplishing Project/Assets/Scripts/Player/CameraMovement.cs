@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class CameraMovement : MonoBehaviour
 {
     [SerializeField] private Transform target;
@@ -11,16 +12,18 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private float lerpSpeedOnFinish = 5;
    
     private bool shoulStopFollowingPlayer;
-    void Start()
+    private void Awake()
     {
         
     }
-
     private void OnEnable()
     {
         FinishPoint.FinishedEvent += FinishPoint_FinishedEvent;
     }
-
+    private void OnDisable()
+    {
+        FinishPoint.FinishedEvent -= FinishPoint_FinishedEvent;
+    }
     private void FinishPoint_FinishedEvent()
     {
        shoulStopFollowingPlayer = true;

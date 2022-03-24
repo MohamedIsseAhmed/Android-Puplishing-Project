@@ -35,8 +35,10 @@ public class PlayerController : MonoBehaviour
              InputHandling();
         if (Input.GetKeyDown(KeyCode.L))
         {
+            ScoreManager.Instance.UpdateScoreOnLoad();
             SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex+1);
             LevelManager.Instance.ÝncreaseCurrentLevel();
+           
         }
     }
 
@@ -61,8 +63,12 @@ public class PlayerController : MonoBehaviour
                     
                 Vector3 hitpoint = new Vector3(hit.point.x, transform.position.y, transform.position.z);
                 Vector3 clampedVector = hit.point.normalized;
-                clampedVector.y = firstObject.localPosition.y;
-                clampedVector.z = firstObject.localPosition.z;
+                if(firstObject != null)
+                {
+                    clampedVector.y = firstObject.localPosition.y;
+                    clampedVector.z = firstObject.localPosition.z;
+                }
+               
 
                 transform.position = Vector3.MoveTowards(transform.position, hitpoint, lerpSpeed * Time.deltaTime);
              

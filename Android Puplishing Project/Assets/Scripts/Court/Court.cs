@@ -14,11 +14,12 @@ public class Court : MonoBehaviour
     }
     [SerializeField] private CourtType courtType;    
     public static event Action UnPaueTheGame;
+    public static event Action<byte> Score;
     private void OnTriggerEnter(Collider other)
     {
         goalParticle.SetActive(true);
         StartCoroutine(DeactivateParentObject(other.transform));
-        print(other.name);
+        Score?.Invoke(1);
     }
     IEnumerator DeactivateParentObject(Transform ball)
     {
@@ -27,10 +28,12 @@ public class Court : MonoBehaviour
 
             yield return new WaitForSeconds(waitTime);
             this.transform.parent.gameObject.SetActive(false);
+       
             ball.transform.gameObject.SetActive(false);
+            UnPaueTheGame?.Invoke();
             goalParticle.SetActive(true);
 
-            UnPaueTheGame?.Invoke();
+         
         }
        
     }

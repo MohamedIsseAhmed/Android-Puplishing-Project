@@ -9,7 +9,7 @@ public class StaticSingeltonTemplate<T> :MonoBehaviour where T : MonoBehaviour
 
     protected virtual void Awake()
     {
-       Instance=this as T;
+           Instance=this as T;  
     }
    
 }

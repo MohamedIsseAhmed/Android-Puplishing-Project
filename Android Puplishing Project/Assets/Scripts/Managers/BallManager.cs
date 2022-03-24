@@ -15,6 +15,8 @@ public class BallManager : MonoBehaviour
     private float lerpRatio;
     [SerializeField] private Vector3 lerpOffset;
     [SerializeField] private AnimationCurve curve;
+
+    public static event Action Check›fplayerChildCount;
     private void Update()
     {
         if (canMove)
@@ -31,37 +33,17 @@ public class BallManager : MonoBehaviour
             lerpOffset=curve.Evaluate(lerpRatio)*lerpOffset;
         }
        
-        print(canMove);
+      
     }
     private void OnTriggerEnter(Collider other)
     {
-       
+
         PlayerController controller = other.GetComponentInParent<PlayerController>();
-         if (controller != null)
-        {
-            GameManager.Instance.pauseTheGame = true;
-            FindObjectOfType<CollisonHandler>().AllignWithThPlayer();
-            Transform objectcollidedwith = null;
-            if (CollisonHandler.instance.GetCollectedObjects.Contains(other.transform))
-            {
-                int lastIndex = CollisonHandler.instance.GetCollectedObjects.IndexOf(other.transform);
-                for (int i = 0; i < data.courts.Count; i++)
-                {
-                    balls.Add(CollisonHandler.instance.GetCollectedObjects[lastIndex]);
-                    lastIndex--;
-                }
-                objectcollidedwith = other.transform;
-                
-                CollisonHandler.instance.GetCollectedObjects.Remove(other.transform);
-                canMove = true;
-                MoveTheBall(objectcollidedwith);
-                GetComponent<BoxCollider>().enabled = false;
-            }
-            
-        }
-      
+        MovingBallToTarget(other, controller);
+
     }
-  
+
+
     private void MoveTheBall(Transform ball)
     {
         ball.parent = null;
@@ -71,7 +53,7 @@ public class BallManager : MonoBehaviour
     IEnumerator MovetToTarget()
     {
      
-        for (int i = 0; i < balls.Count; i++)
+        for (byte i = 0; i < balls.Count; i++)
         {
             balls[i].transform.position = Vector3.MoveTowards(balls[i].transform.position, data.courts[i].position, data.lerpSpeed * Time.deltaTime)+lerpOffset;
             yield return new WaitForSeconds(data.waitTime);
@@ -82,6 +64,34 @@ public class BallManager : MonoBehaviour
         yield return null;
         
     }
+
+    public void MovingBallToTarget(Collider other, PlayerController controller)
+    {
+        if (controller != null)
+        {
+            GameManager.Instance.pauseTheGame = true;
+            FindObjectOfType<CollisonHandler>().AllignWithThPlayer();
+            Transform objectcollidedwith = null;
+            if (CollisonHandler.Instance.GetCollectedObjects.Contains(other.transform))
+            {
+                int indexOfCurrentCollidedBall = CollisonHandler.Instance.GetCollectedObjects.IndexOf(other.transform);
+                for (byte i = 0; i < data.courts.Count; i++)
+                {
+                    balls.Add(CollisonHandler.Instance.GetCollectedObjects[indexOfCurrentCollidedBall]);
+                    indexOfCurrentCollidedBall--;
+                }
+                objectcollidedwith = other.transform;
+                CollisonHandler.Instance.GetCollectedObjects.Remove(other.transform);
+                canMove = true;
+                MoveTheBall(objectcollidedwith);
+                GetComponent<BoxCollider>().enabled = false;
+
+                Check›fplayerChildCount?.Invoke();
+            }
+
+        }
+    }
+
     [System.Serializable]
     public class Data
     {

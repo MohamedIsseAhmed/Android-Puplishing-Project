@@ -23,21 +23,23 @@ public class LevelManager : StaticSingeltonTemplate<LevelManager>
         
         if (Instance != null)
         {
-            int count = FindObjectsOfType<LevelManager>().Length;
-            if(count > 1)
-            {
-                Destroy(gameObject);
-            }
+           
             Destroy(gameObject);
         }
         else
         {
+
+            int count = FindObjectsOfType<LevelManager>().Length;
+            if (count > 1)
+            {
+                Destroy(gameObject);
+            }
             DontDestroyOnLoad(gameObject);
             progression.CurrentLevel = PlayerPrefs.GetFloat("CurrentLevel Level", 1);
             PlayerPrefs.SetFloat("CurrentLevel Level", progression.CurrentLevel);
             progression.NextLevel = PlayerPrefs.GetFloat("NextLevel Level", progression.CurrentLevel + 1);
             PlayerPrefs.SetFloat("NextLevel Level", progression.NextLevel);
-            print(progression.NextLevel);
+        
             progression.currentLevelText.text = progression.CurrentLevel.ToString();
             progression.nexttLevelText.text = progression.NextLevel.ToString();
         }

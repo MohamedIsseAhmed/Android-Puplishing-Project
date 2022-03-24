@@ -5,14 +5,13 @@ using DG.Tweening;
 using System;
 public class CylinderObstacle : ObstacleBase
 {
-    //[SerializeField] private float xTweenTarget;
+    [SerializeField] private float _xTweenTarget;
 
-    //[SerializeField] private float tweenDuration;
-    //[SerializeField] private float tweenDurationForBall;
+    [SerializeField] private float _tweenDuration;
+    [SerializeField] private float _tweenDurationForBall=1.75F;
 
-    // private int infinityLoop = -1;
-    // private Tween myTween;
-     public static event Action Check›fplayerChildCount;
+   
+    public static event Action Check›fplayerChildCount;
     // private void Start()
     // {
     //     myTween = transform.DOLocalMoveX(xTweenTarget, tweenDuration, false).SetLoops(infinityLoop, LoopType.Yoyo);
@@ -20,9 +19,9 @@ public class CylinderObstacle : ObstacleBase
 
     protected override void Start()
     {
-        xTweenTarget = 8.71f;
-        tweenDuration = 3;
-        tweenDurationForBall = 1.75f;
+        xTweenTarget = _xTweenTarget;
+        tweenDuration = _tweenDuration;
+        tweenDurationForBall = _tweenDurationForBall;
         base.Start();
         //TEST 
         

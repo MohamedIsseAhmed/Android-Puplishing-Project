@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollisonHandler : MonoBehaviour
+public class CollisonHandler : Singelton<CollisonHandler>
 {
     [SerializeField] private float lerpSpeed = 10f;
     [SerializeField] private float alligningSpeed = 10f;
@@ -11,9 +11,9 @@ public class CollisonHandler : MonoBehaviour
 
     int index = 0;
     public static CollisonHandler instance;
-    private void Awake()
+    protected override void Awake()
     {
-        instance = this;
+        base.Awake();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -40,7 +40,7 @@ public class CollisonHandler : MonoBehaviour
     {
 
         float zOffset = 1;
-        for (int i = 1; i <= collectedObject.Count - 1; i++)
+        for (byte i = 1; i <= collectedObject.Count - 1; i++)
         {
 
             if (i == 1)
@@ -61,7 +61,7 @@ public class CollisonHandler : MonoBehaviour
     }
     IEnumerator ScallingObjects()
     {
-        for (int i = 1; i <= collectedObject.Count - 1; i++)
+        for (byte i = 1; i <= collectedObject.Count - 1; i++)
         {
             collectedObject[i].transform.localScale = collectedObject[i].transform.localScale * 1.3f;
             yield return null;
@@ -69,7 +69,7 @@ public class CollisonHandler : MonoBehaviour
     }
     IEnumerator DeScallingObjects()
     {
-        for (int i = 1; i <= collectedObject.Count - 1; i++)
+        for (byte i = 1; i <= collectedObject.Count - 1; i++)
         {
             collectedObject[i].transform.localScale = collectedObject[i].transform.localScale / 1.3f;
             yield return null;
@@ -79,7 +79,7 @@ public class CollisonHandler : MonoBehaviour
     {
         if (collectedObject.Count >0)
         {
-            for (int i = 1; i <= collectedObject.Count - 1; i++)
+            for (byte i = 1; i <= collectedObject.Count - 1; i++)
             {
 
 
