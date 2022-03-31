@@ -234,6 +234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goalParticle: {fileID: 4218177374480996726}
   waitTime: 0.5
+  scoreScriptabpleObject: {fileID: 11400000, guid: b49cc0fc702dc7143b55e8d1cb9491be, type: 2}
   courtType: 0
 --- !u!135 &3502475318904924094
 SphereCollider:

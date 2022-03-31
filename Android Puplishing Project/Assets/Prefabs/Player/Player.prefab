@@ -64,6 +64,7 @@ MonoBehaviour:
   maxXrange: 3.1
   minXrange: -2
   xOffset: {x: 0, y: 0, z: 0}
+  loadingTest: {fileID: 11400000, guid: 3843bbf539f7fdd41abfe705d24845b7, type: 2}
 --- !u!54 &5230604039863780263
 Rigidbody:
   m_ObjectHideFlags: 0

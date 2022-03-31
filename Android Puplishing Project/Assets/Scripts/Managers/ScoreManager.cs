@@ -9,22 +9,22 @@ public class ScoreManager : StaticSingeltonTemplate<ScoreManager>
     [SerializeField] private Progression progression;
     protected override void Awake()
     {
-        if (Instance != null)
-        {
+        //if (Instance != null)
+        //{
 
-            Destroy(gameObject);
-        }
-        else
-        {
-            int count = FindObjectsOfType<LevelManager>().Length;
-            if (count > 1)
-            {
-                Destroy(gameObject);
-            }
-            DontDestroyOnLoad(gameObject);
-            scoreCount = (byte)PlayerPrefs.GetInt("Score");
+        //    Destroy(gameObject);
+        //}
+        //else
+        //{
+        //    int count = FindObjectsOfType<LevelManager>().Length;
+        //    if (count > 1)
+        //    {
+        //        Destroy(gameObject);
+        //    }
+        //    DontDestroyOnLoad(gameObject);
+        //    scoreCount = (byte)PlayerPrefs.GetInt("Score");
 
-        }
+        //}
         base.Awake();
     }
     private void Update()
@@ -41,8 +41,8 @@ public class ScoreManager : StaticSingeltonTemplate<ScoreManager>
     
     public void Score(byte _score)
     {
-        scoreCount += _score;
-        PlayerPrefs.SetInt("Score",scoreCount);
+        //scoreCount += _score;
+        //PlayerPrefs.SetInt("Score",scoreCount);
         
     }
     public byte GetScore()

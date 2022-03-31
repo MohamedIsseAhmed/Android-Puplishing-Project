@@ -23,13 +23,14 @@ public class GroundColorChanger : MonoBehaviour
     private void Awake()
     {
         meshRenderer = GetComponent<MeshRenderer>();
+        meshRenderer.material.color = Random.ColorHSV(hueMin, hueMax, saturationMin, saturationMax, valueMin, valueMax, alphaMin, alphaMax);
     }
     void Start()
     {
         //System.Random rand=new System.Random();
         //bool randomBool= rand.Next(minRandomValue, maxRandomValue) % 2 == 0;
        // meshRenderer.material.color = randomBool ? new Color(0, 0.5f, 0, 1f) : new Color(0f, 0.4782309f, 0.7511321f, 1f);
-        meshRenderer.material.color  = Random.ColorHSV(hueMin, hueMax, saturationMin, saturationMax, valueMin, valueMax, alphaMin, alphaMax);
+       
     }
 
   

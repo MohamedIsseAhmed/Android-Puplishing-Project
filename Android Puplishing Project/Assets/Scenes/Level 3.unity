@@ -3636,6 +3636,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb711cf57789f974ba6ae15e61bb58f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hueMin: 0
+  hueMax: 1
+  saturationMin: 0.5
+  saturationMax: 0.75
+  valueMin: 0.5
+  valueMax: 1
+  alphaMin: 0
+  alphaMax: 0.5
 --- !u!1001 &7153194645305283846
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class Court : MonoBehaviour
 {
     [SerializeField] private GameObject goalParticle;
     [SerializeField] private float waitTime = 3;
+    [SerializeField] private ScoreScriptabpleObject scoreScriptabpleObject;
     private enum CourtType
     {
         InGameCourt,
@@ -19,7 +20,8 @@ public class Court : MonoBehaviour
     {
         goalParticle.SetActive(true);
         StartCoroutine(DeactivateParentObject(other.transform));
-        Score?.Invoke(1);
+        Score?.Invoke(0);
+        scoreScriptabpleObject.IncreaseScore(1);
     }
     IEnumerator DeactivateParentObject(Transform ball)
     {

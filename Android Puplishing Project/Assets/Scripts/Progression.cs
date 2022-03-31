@@ -16,8 +16,23 @@ public class Progression : MonoBehaviour
     public Text nexttLevelText;
     public TextMeshProUGUI scoreText;
 
+    [SerializeField] private ScoreScriptabpleObject scoreScriptabpleObject;
+    private void OnEnable()
+    {
+        scoreScriptabpleObject.ScoreEvent.AddListener(UpdateScore);
+        scoreText.text = "Score:" +scoreScriptabpleObject.CurrentScore;
+    }
+    
+    private void OnDisable()
+    {
+        scoreScriptabpleObject.ScoreEvent.RemoveListener(UpdateScore);
+    }
     private void Update()
     {
-        scoreText.text ="Score:" + PlayerPrefs.GetInt("Score"); ;
+        
+    }
+    public void UpdateScore(int _score)
+    {
+        scoreText.text = "Score:" +_score.ToString();
     }
 }

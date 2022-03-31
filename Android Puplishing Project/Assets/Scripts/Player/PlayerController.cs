@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public bool IsStopped { get { return stopped; } set { stopped = value; } }
 
     private Vector3 movementVector;
+    [SerializeField] private LoadingTest loadingTest;
     private void Awake()
     {
         collisonHandler = GetComponent<CollisonHandler>();
@@ -36,9 +37,9 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L))
         {
             ScoreManager.Instance.UpdateScoreOnLoad();
-            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex+1);
+            //SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex+1);
             LevelManager.Instance.ÝncreaseCurrentLevel();
-           
+           loadingTest.LoadScene();
         }
     }
 

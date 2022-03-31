@@ -20,32 +20,29 @@ public class LevelManager : StaticSingeltonTemplate<LevelManager>
     [SerializeField] Progression progression;
     protected override void Awake()
     {
-        
-        if (Instance != null)
-        {
-           
-            Destroy(gameObject);
-        }
-        else
-        {
-
-            int count = FindObjectsOfType<LevelManager>().Length;
-            if (count > 1)
-            {
-                Destroy(gameObject);
-            }
-            DontDestroyOnLoad(gameObject);
-            progression.CurrentLevel = PlayerPrefs.GetFloat("CurrentLevel Level", 1);
-            PlayerPrefs.SetFloat("CurrentLevel Level", progression.CurrentLevel);
-            progression.NextLevel = PlayerPrefs.GetFloat("NextLevel Level", progression.CurrentLevel + 1);
-            PlayerPrefs.SetFloat("NextLevel Level", progression.NextLevel);
-        
-            progression.currentLevelText.text = progression.CurrentLevel.ToString();
-            progression.nexttLevelText.text = progression.NextLevel.ToString();
-        }
         base.Awake();
+      
+        progression.CurrentLevel = PlayerPrefs.GetFloat("CurrentLevel Level", 1);
+        PlayerPrefs.SetFloat("CurrentLevel Level", progression.CurrentLevel);
+        progression.NextLevel = PlayerPrefs.GetFloat("NextLevel Level", progression.CurrentLevel + 1);
+        PlayerPrefs.SetFloat("NextLevel Level", progression.NextLevel);
 
-     
+        progression.currentLevelText.text = progression.CurrentLevel.ToString();
+        progression.nexttLevelText.text = progression.NextLevel.ToString();
+       
+        //else
+        //{
+
+        //    //int count = FindObjectsOfType<LevelManager>().Length;
+        //    //if (count > 1)
+        //    //{
+        //    //    Destroy(gameObject);
+        //    //}
+
+        //}
+      
+        
+
 
     }
     private void Update()
