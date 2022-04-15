@@ -12,10 +12,10 @@ public class FinishPoint : MonoBehaviour
     [SerializeField] private Vector3 lerpOffset;
     [SerializeField] private List<Transform> courtsOnFinish = new List<Transform>();
     [SerializeField] private AnimationCurve curve;
-    [SerializeField] private LevelComplatedSo sO;
+    [SerializeField] private LevelComplatedSo levelComplatedSO;
     private bool hasFinished = false;
 
-    public static event Action FinishedEvent;
+    public static event Action ChangeCameraBehaviourOnFinish;
  
     private void Update()
     {
@@ -31,11 +31,11 @@ public class FinishPoint : MonoBehaviour
     {
         GameManager.Instance.pauseTheGame = true;
         hasFinished = true;
-        FinishedEvent?.Invoke();
+        ChangeCameraBehaviourOnFinish?.Invoke();
     }
     private void GoToCourtOnFinish()
     {
-        StartCoroutine(sO.GoToCourt(CollisonHandler.Instance.GetCollectedObjects));
+        StartCoroutine(levelComplatedSO.GoToCourt(CollisonHandler.Instance.GetCollectedObjects));
       
     }
 }

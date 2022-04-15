@@ -26,8 +26,3 @@ public class LevelComplatedSo : ScriptableObject
     }
 
 }
-public enum UITypeOnFinish
-{
-    Fialed,
-    LevelComplated
-}

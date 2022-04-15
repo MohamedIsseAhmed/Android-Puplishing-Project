@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad20225d4ef87964c829653a4b3193a7, type: 3}
   m_Name: Scene_Load
   m_EditorClassIdentifier: 
-  currentScene: 1
+  currentScene: 0
   nextScene: 0

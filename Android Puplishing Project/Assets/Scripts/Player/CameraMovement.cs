@@ -18,11 +18,11 @@ public class CameraMovement : MonoBehaviour
     }
     private void OnEnable()
     {
-        FinishPoint.FinishedEvent += FinishPoint_FinishedEvent;
+        FinishPoint.ChangeCameraBehaviourOnFinish += FinishPoint_FinishedEvent;
     }
     private void OnDisable()
     {
-        FinishPoint.FinishedEvent -= FinishPoint_FinishedEvent;
+        FinishPoint.ChangeCameraBehaviourOnFinish -= FinishPoint_FinishedEvent;
     }
     private void FinishPoint_FinishedEvent()
     {

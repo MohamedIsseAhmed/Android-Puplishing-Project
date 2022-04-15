@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class ScoreScriptabpleObject : ScriptableObject
 {
     [SerializeField] private int currentScore = 0;
-    public int CurrentScore { get { return currentScore; } private set { } }
+    public int CurrentScore { get { return currentScore; } set { currentScore = value; } }
     //[SerializeField] private int nextScore = 0;
      
     [System.NonSerialized]
@@ -27,4 +27,7 @@ public class ScoreScriptabpleObject : ScriptableObject
         
         ScoreEvent.Invoke(currentScore);
     }
+
+ 
 }
+

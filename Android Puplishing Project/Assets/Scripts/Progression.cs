@@ -3,22 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public class Progression : MonoBehaviour
+public class Progression : MonoBehaviour,ISavable
 {
-    [SerializeField] private float currentLevel;
-    public float CurrentLevel { get { return currentLevel; } set { currentLevel = value; } }
-    [SerializeField] private float nextLevel;
-    public float NextLevel { get { return nextLevel; } set { nextLevel = value; } }
+    [SerializeField] private int currentLevel;
+    public int CurrentLevel { get { return currentLevel; } set { currentLevel = value; } }
+    [SerializeField] private int nextLevel;
+    public int NextLevel { get { return nextLevel; } set { nextLevel = value; } }
     [SerializeField] private float totlaLvel;
-    public float TotalLevel { get { return totlaLvel; } set { nextLevel = value; } }
+    public float TotalLevel { get { return totlaLvel; } set { totlaLvel = value; } }
     public RawImage fillImage;
-    public Text currentLevelText;
-    public Text nexttLevelText;
+    public TextMeshProUGUI  currentLevelText;
+    public TextMeshProUGUI nexttLevelText;
     public TextMeshProUGUI scoreText;
 
     [SerializeField] private ScoreScriptabpleObject scoreScriptabpleObject;
+
+    [SerializeField] private Text newScore;
+    int n_score;
+
+    private void Awake()
+    {
+        
+    }
     private void OnEnable()
     {
+        //SavingAndLoading.InitializeValuesEvent += SavingAndLoading_InitializeValuesEvent;
         scoreScriptabpleObject.ScoreEvent.AddListener(UpdateScore);
         scoreText.text = "Score:" +scoreScriptabpleObject.CurrentScore;
     }
@@ -26,13 +35,46 @@ public class Progression : MonoBehaviour
     private void OnDisable()
     {
         scoreScriptabpleObject.ScoreEvent.RemoveListener(UpdateScore);
-    }
-    private void Update()
-    {
         
     }
+
+  
     public void UpdateScore(int _score)
     {
         scoreText.text = "Score:" +_score.ToString();
+    }
+    public object CaptureState()
+    {
+        print("score captured"+scoreScriptabpleObject.CurrentScore);
+        return new ScoreData
+        {
+            score = scoreScriptabpleObject.CurrentScore
+          
+        };
+
+    }
+    private void Update()
+    {
+        UpdateLevelTexts();
+    }
+    public void UpdateLevelTexts()
+    {
+        currentLevelText.text = LevelManager.Instance.currentLevel.ToString();
+        nexttLevelText.text = LevelManager.Instance.nextLevel.ToString();
+        float ratio = currentLevel / TotalLevel;
+        fillImage.rectTransform.localScale = new Vector3(ratio, 1, 1);
+    }
+    public void RestoreState(object state)
+    {
+        print("score Loaded" + scoreScriptabpleObject.CurrentScore);
+        var scoreData=(ScoreData)state;
+        scoreScriptabpleObject.CurrentScore=scoreData.score+3;
+        n_score=scoreData.score+3;
+    }
+
+    [System.Serializable]
+    struct ScoreData
+    {
+        public int score;
     }
 }

@@ -23,5 +23,6 @@ public class LoadingTest : ScriptableObject
     {
         currentScene++;
         LoadEvent.Invoke();
+        //SceneManager.LoadSceneAsync(currentScene);
     }
 }

@@ -1,56 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader : MonoBehaviour
+public class SceneLoader : StaticSingeltonTemplate<SceneLoader>
 {
-    [SerializeField] private LoadingTest loadingTest;
-
-    private int currentIndex;
-    private void OnEnable()
+    SavingAndLoading savingAndLoading;
+    protected override  void Awake()
     {
-        currentIndex = loadingTest.currentScene;
-        loadingTest.LoadEvent.AddListener(LoadScene);
+        savingAndLoading = GetComponent<SavingAndLoading>();
+        base.Awake();
+        savingAndLoading.Load();
+
     }
-   
     private void Start()
     {
-        //AsyncOperation operation=
-        //SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
-        //currentIndex = loadingTest.currentScene;
-        //SceneManager.LoadSceneAsync(currentIndex);
-        //print("Loading" + currentIndex);
-        StartCoroutine(LoadSceneOperation());
-    }
-    IEnumerator LoadSceneOperation()
-    {
-        yield return null;
-
-      
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(currentIndex);
        
-        asyncOperation.allowSceneActivation = false;
-      
-        while (!asyncOperation.isDone)
-        {
-            if (asyncOperation.progress >= 0.9f)
-            {
-               
-               asyncOperation.allowSceneActivation = true;
-
-            }
-
-            yield return null;
-        }
     }
-    private void OnDisable()
+    private void OnEnable()
     {
-        loadingTest.LoadEvent.RemoveListener(LoadScene);
+        LevelComplatedSo.OnlevelComplated += LevelComplatedSo_OnlevelComplated;
     }
-    public void LoadScene()
+
+    private void LevelComplatedSo_OnlevelComplated()
     {
-        currentIndex=loadingTest.currentScene;
-        SceneManager.LoadScene(currentIndex);
+        savingAndLoading.Save();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+       // StartCoroutine(LoadNextScene());
+    }
+    IEnumerator LoadNextScene()
+    {
+       
+        savingAndLoading.Save();
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+        yield return null;
     }
 }

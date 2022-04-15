@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingTest: {fileID: 11400000, guid: 3843bbf539f7fdd41abfe705d24845b7, type: 2}
+  loadingSlider: {fileID: 0}
+  loadSpeed: 1
