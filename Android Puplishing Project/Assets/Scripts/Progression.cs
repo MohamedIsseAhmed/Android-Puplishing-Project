@@ -45,7 +45,7 @@ public class Progression : MonoBehaviour,ISavable
     }
     public object CaptureState()
     {
-        print("score captured"+scoreScriptabpleObject.CurrentScore);
+       
         return new ScoreData
         {
             score = scoreScriptabpleObject.CurrentScore
@@ -66,7 +66,7 @@ public class Progression : MonoBehaviour,ISavable
     }
     public void RestoreState(object state)
     {
-        print("score Loaded" + scoreScriptabpleObject.CurrentScore);
+        
         var scoreData=(ScoreData)state;
         scoreScriptabpleObject.CurrentScore=scoreData.score+3;
         n_score=scoreData.score+3;

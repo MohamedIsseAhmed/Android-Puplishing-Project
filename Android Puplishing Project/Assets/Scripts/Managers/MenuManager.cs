@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,8 +8,9 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject levelComplatedPanel;
     [SerializeField] private GameObject failedPanel;
+    private WaitForSeconds wait =new WaitForSeconds(2);
 
-   
+    public static event Action LoadNextScene;
     private void OnEnable()
     {
        
@@ -29,8 +31,17 @@ public class MenuManager : MonoBehaviour
     }
     private void OnLevelComplated ()
     {
+        //GameManager.Instance.LevelComplated = true;
+        //levelComplatedPanel.SetActive(true);
+        StartCoroutine(LevelComplatedDelay());
+    }
+    IEnumerator LevelComplatedDelay()
+    {
         GameManager.Instance.LevelComplated = true;
-     
         levelComplatedPanel.SetActive(true);
+        yield return wait;
+        LoadNextScene?.Invoke();
+
+
     }
 }

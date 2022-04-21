@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
-public class SceneLoader : StaticSingeltonTemplate<SceneLoader>
+public class SceneLoader : StaticSingeltonTemplate<SceneLoader>,ISavable
 {
     SavingAndLoading savingAndLoading;
+
+    [SerializeField] private static int currentSceneIndex;
     protected override  void Awake()
     {
         savingAndLoading = GetComponent<SavingAndLoading>();
@@ -14,26 +17,49 @@ public class SceneLoader : StaticSingeltonTemplate<SceneLoader>
         savingAndLoading.Load();
 
     }
-    private void Start()
+    private void  Start()
     {
+        SceneManager.LoadScene(currentSceneIndex);
        
     }
+   
+    
     private void OnEnable()
     {
-        LevelComplatedSo.OnlevelComplated += LevelComplatedSo_OnlevelComplated;
+        MenuManager.LoadNextScene += MenuManager_LoadNextScene;
     }
 
-    private void LevelComplatedSo_OnlevelComplated()
+    private void MenuManager_LoadNextScene()
     {
         savingAndLoading.Save();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-       // StartCoroutine(LoadNextScene());
+        SceneManager.LoadScene(currentSceneIndex + 1);
     }
-    IEnumerator LoadNextScene()
+
+    public void ReloadSceneOnFail()
     {
+        SceneManager.LoadScene(currentSceneIndex);
+    }
+
+    public object CaptureState()
+    {
+        var sceneIndex=new SceneIndex();
+        sceneIndex.index=currentSceneIndex;
+      
+        return sceneIndex;
+
+    }
+
+    public void RestoreState(object state)
+    {
+        var restoredSceneIndex=(SceneIndex)state;
        
-        savingAndLoading.Save();
-        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
-        yield return null;
+        currentSceneIndex =restoredSceneIndex.index+1;
+       
+    }
+
+    [System.Serializable]
+    struct SceneIndex
+    {
+        public int index;
     }
 }

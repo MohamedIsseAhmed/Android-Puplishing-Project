@@ -34,6 +34,7 @@ public class SavingAndLoading : MonoBehaviour
             print("Loaded");
             Load();
         }
+        if(Input.GetKeyDown(KeyCode.D)) { File.Delete(GetPathSaveFile(saveFilePath));}
     }
 
     private void SaveFile(object state)
@@ -50,7 +51,7 @@ public class SavingAndLoading : MonoBehaviour
         string saveFile = GetPathSaveFile(saveFilePath);
         if (!File.Exists(saveFile))
         {
-            print("not found");
+          
             InitializeValuesEvent?.Invoke();
           
             return new Dictionary<string, object>();

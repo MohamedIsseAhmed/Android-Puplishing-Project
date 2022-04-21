@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
        rigidbody = GetComponent<Rigidbody>();
        
     }
-
+   
     void Update()
     {
         if (GameManager.Instance.Failed) return;
@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
            loadingTest.LoadScene();
         }
     }
-
+    
     private void InputHandling()
     {
         //float mouseX = Input.GetAxis("Mouse X");
@@ -87,6 +87,7 @@ public class PlayerController : MonoBehaviour
         }
         
     }
+    //NOT IN USE
     private void ClampingXRange()
     {
         if (transform.position.x > maxXrange)

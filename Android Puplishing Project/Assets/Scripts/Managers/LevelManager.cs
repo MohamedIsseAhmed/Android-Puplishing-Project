@@ -87,11 +87,6 @@ public class LevelManager : StaticSingeltonTemplate<LevelManager>,ISavable
         SaveAndLoadLevel savedData = new SaveAndLoadLevel();
         savedData.currentLevel =progression.CurrentLevel;
         savedData.nexttLevel = progression.NextLevel;
-        print(savedData.currentLevel);
-        print(savedData.nexttLevel);
-        print("Level saved");
-        print(progression.CurrentLevel);
-        print(progression.NextLevel);
         currentLevel = savedData.currentLevel;
         nextLevel = savedData.nexttLevel;
         return savedData;    
@@ -111,9 +106,7 @@ public class LevelManager : StaticSingeltonTemplate<LevelManager>,ISavable
 
         currentLevel = restoredStateData.currentLevel + 1;
         nextLevel= restoredStateData.nexttLevel+1;
-        print(progression.CurrentLevel);
-        print(progression.NextLevel);
-        print("Level loaded");
+      
     }
 
     [System.Serializable]

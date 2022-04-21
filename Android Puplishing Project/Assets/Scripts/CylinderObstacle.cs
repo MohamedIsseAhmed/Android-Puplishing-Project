@@ -6,24 +6,37 @@ using System;
 public class CylinderObstacle : ObstacleBase
 {
     [SerializeField] private float _xTweenTarget;
-
+    [SerializeField] private float _zTweenTarget;
     [SerializeField] private float _tweenDuration;
     [SerializeField] private float _tweenDurationForBall=1.75F;
+    [SerializeField] private float _waitTime=1.75F;
+    [SerializeField] private float _lerpTime=5F;
+    [SerializeField] private float _distanceToPoint=0.05F;
+    [SerializeField] private Vector3 _rotationEndValue;
+    [SerializeField] private Transform[] _paths=new Transform[4];
 
    
     public static event Action Check›fplayerChildCount;
-    // private void Start()
-    // {
-    //     myTween = transform.DOLocalMoveX(xTweenTarget, tweenDuration, false).SetLoops(infinityLoop, LoopType.Yoyo);
-    // }
+  
 
     protected override void Start()
     {
         xTweenTarget = _xTweenTarget;
         tweenDuration = _tweenDuration;
         tweenDurationForBall = _tweenDurationForBall;
+        rotationEndValue = _rotationEndValue;
+        zTweenTarget = _zTweenTarget;
+        waitTime = _waitTime;
+        lerpTime = _lerpTime;
+        distanceToPoints = _distanceToPoint;
+        //for (int i = 0; i < _paths.Length; i++)
+        //{
+        //    print(i.ToString());
+        //    paths[i] = _paths[i].position;
+        //}
+        paths = _paths;
         base.Start();
-        //TEST 
+      
         
     }
     private void OnTriggerEnter(Collider other)
