@@ -17,20 +17,29 @@ public class BallManager : MonoBehaviour
     [SerializeField] private AnimationCurve curve;
 
     public static event Action Check›fplayerChildCount;
+
+   [SerializeField] private CollisonHandler collisonHandler;
+    private BoxCollider boxCollider;
+    private void Awake()
+    {
+        boxCollider = GetComponent<BoxCollider>();
+      
+    }
     private void Update()
     {
+        if (!canMove) return;
         if (canMove)
         {
             StartCoroutine(MovetToTarget());
             timer += Time.deltaTime;
-            if(timer > data.lerpSpeed)
+            if (timer > data.lerpSpeed)
             {
-                timer= data.lerpSpeed;
+                timer = data.lerpSpeed;
                 lerpOffset.y = 4f;
             }
-            lerpRatio=timer/data.lerpSpeed;
-          
-            lerpOffset=curve.Evaluate(lerpRatio)*lerpOffset;
+            lerpRatio = timer / data.lerpSpeed;
+
+            lerpOffset = curve.Evaluate(lerpRatio) * lerpOffset;
         }
        
       
@@ -70,7 +79,7 @@ public class BallManager : MonoBehaviour
         if (controller != null)
         {
             GameManager.Instance.pauseTheGame = true;
-            FindObjectOfType<CollisonHandler>().AllignWithThPlayer();
+            collisonHandler.AllignWithThPlayer();
             Transform objectcollidedwith = null;
             if (CollisonHandler.Instance.GetCollectedObjects.Contains(other.transform))
             {
@@ -84,7 +93,7 @@ public class BallManager : MonoBehaviour
                 CollisonHandler.Instance.GetCollectedObjects.Remove(other.transform);
                 canMove = true;
                 MoveTheBall(objectcollidedwith);
-                GetComponent<BoxCollider>().enabled = false;
+                boxCollider.enabled = false;
 
                 Check›fplayerChildCount?.Invoke();
             }

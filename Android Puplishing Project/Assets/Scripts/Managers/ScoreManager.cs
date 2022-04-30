@@ -27,9 +27,7 @@ public class ScoreManager : StaticSingeltonTemplate<ScoreManager>
         //}
         base.Awake();
     }
-    private void Update()
-    {
-    }
+ 
     private void OnEnable()
     {
         Court.Score += Score;

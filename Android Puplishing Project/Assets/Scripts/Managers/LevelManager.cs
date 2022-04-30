@@ -25,13 +25,7 @@ public class LevelManager : StaticSingeltonTemplate<LevelManager>,ISavable
     {
         base.Awake();
       
-        //progression.CurrentLevel = PlayerPrefs.GetInt("CurrentLevel Level", 1);
-        //PlayerPrefs.SetInt("CurrentLevel Level", progression.CurrentLevel);
-        //progression.NextLevel =  progression.CurrentLevel + 1;
-        //PlayerPrefs.SetInt("NextLevel Level", progression.NextLevel);
-
-        //progression.currentLevelText.text = progression.CurrentLevel.ToString();
-        //progression.nexttLevelText.text = progression.NextLevel.ToString();
+        
     }
     private void Start()
     {
@@ -43,22 +37,7 @@ public class LevelManager : StaticSingeltonTemplate<LevelManager>,ISavable
         ratio = Mathf.Clamp(ratio, 0, 1);
         progression.fillImage.rectTransform.localScale = new Vector3(ratio, 1, 1);
     }
-    public void ÝncreaseCurrentLevel()
-    {   
-        //progression.CurrentLevel += 1;
-        //PlayerPrefs.SetInt("CurrentLevel Level", progression.CurrentLevel);
-        //progression.NextLevel =  progression.CurrentLevel + 1;
-         
-        //PlayerPrefs.SetInt("NextLevel Level", progression.NextLevel);
-        //float ratio = progression.CurrentLevel / progression.TotalLevel;
-        //progression.fillImage.rectTransform.localScale = new Vector3(ratio, 1, 1);
-
-        //progression.currentLevelText.text = progression.CurrentLevel.ToString();
-        //progression.nexttLevelText.text = progression.NextLevel.ToString();
-
-        //print(progression.CurrentLevel);
-        //print(progression.NextLevel);
-    }
+  
     private void OnEnable()
     {
         SavingAndLoading.InitializeValuesEvent += SavingAndLoading_InitializeValuesEvent;
@@ -98,11 +77,6 @@ public class LevelManager : StaticSingeltonTemplate<LevelManager>,ISavable
 
         progression.CurrentLevel=restoredStateData.currentLevel+1;
         progression.NextLevel=restoredStateData.nexttLevel+1;
-        //float ratio = progression.CurrentLevel / progression.TotalLevel;
-        //progression.fillImage.rectTransform.localScale = new Vector3(ratio, 1, 1);
-
-        //progression.currentLevelText.text = progression.CurrentLevel.ToString();
-        //progression.nexttLevelText.text = progression.NextLevel.ToString();
 
         currentLevel = restoredStateData.currentLevel + 1;
         nextLevel= restoredStateData.nexttLevel+1;

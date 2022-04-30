@@ -34,13 +34,7 @@ public class PlayerController : MonoBehaviour
         if (GameManager.Instance.Failed) return;
         if(!GameManager.Instance.pauseTheGame)
              InputHandling();
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            ScoreManager.Instance.UpdateScoreOnLoad();
-            //SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex+1);
-            LevelManager.Instance.ÝncreaseCurrentLevel();
-           loadingTest.LoadScene();
-        }
+     
     }
     
     private void InputHandling()
@@ -57,7 +51,7 @@ public class PlayerController : MonoBehaviour
             if (Physics.Raycast(ray, out hit, 10000))
             {
 
-                if (GetComponent<CollisonHandler>().GetCollectedObjects.Count > 0)
+                if (collisonHandler.GetCollectedObjects.Count > 0)
                 {
                     firstObject = collisonHandler.GetCollectedObjects[0].transform;
                 }
@@ -75,12 +69,12 @@ public class PlayerController : MonoBehaviour
              
                // ClampingXRange();
 
-                if (GetComponent<CollisonHandler>().GetCollectedObjects.Contains(firstObject))
+                if (collisonHandler.GetCollectedObjects.Contains(firstObject))
                 {
                     firstObject.localPosition =
                   Vector3.MoveTowards(firstObject.localPosition, clampedVector, lerpSpeed * Time.deltaTime);
                 }
-                if (GetComponent<CollisonHandler>().GetCollectedObjects.Count>0)
+                if (collisonHandler.GetCollectedObjects.Count>0)
                     collisonHandler.StartCoroutine(collisonHandler.AllignWithThPlayer());
 
             }

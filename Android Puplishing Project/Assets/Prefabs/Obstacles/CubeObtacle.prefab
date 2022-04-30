@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: da2e630ecf267f249a1138f4804f86cc, type: 2}
+  - {fileID: 2100000, guid: e1bd79e70692e2d4bb68f43618a093c8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,9 +109,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5280f6c4fc71fdf489cfde60fce35d4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationEndValue: {x: 0, y: 0, z: 0}
+  obstacleTyoe: 0
+  paths:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   _xTweenTarget: 6.75
+  _zTweenTarget: 0
   _tweenDuration: 2
   _tweenDurationForBall: 1.75
+  _waitTime: 1.75
+  _lerpTime: 5
+  _distanceToPoint: 0.05
+  _rotationEndValue: {x: 0, y: 0, z: 0}
+  _paths:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &3202766784403758138
 MonoBehaviour:
   m_ObjectHideFlags: 0

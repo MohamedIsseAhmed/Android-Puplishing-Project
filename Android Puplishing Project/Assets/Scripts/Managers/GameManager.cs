@@ -7,10 +7,11 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singelton<GameManager>
 {
     [SerializeField] private WaitForSeconds waitTime = new WaitForSeconds(1);
+    [SerializeField] private Transform player;
     public static GameManager instance;
 
     public bool pauseTheGame = false;
-    private Transform player;
+  
 
     private bool levelComplated;
     public bool LevelComplated { get {return  levelComplated; } set { levelComplated = value; } }
@@ -24,7 +25,7 @@ public class GameManager : Singelton<GameManager>
         base.Awake();
       
       
-       player = GameObject.FindGameObjectWithTag("Player").transform;
+      player = GameObject.FindGameObjectWithTag("Player").transform;
     
     }
     private void OnEnable()

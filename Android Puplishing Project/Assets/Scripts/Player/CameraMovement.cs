@@ -42,7 +42,7 @@ public class CameraMovement : MonoBehaviour
             Vector3 direction = target.position - transform.position;
             Quaternion lookRotation = Quaternion.LookRotation(direction);
             transform.position = Vector3.Lerp(transform.position, target.position + targetOffset, lerpSpeed * Time.deltaTime);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, lerpSpeed * Time.deltaTime);
+            //transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, lerpSpeed * Time.deltaTime);
         }
     }
     private IEnumerator CameraMovementOnFinishingGame()

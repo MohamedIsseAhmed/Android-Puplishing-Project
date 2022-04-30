@@ -12,24 +12,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7460491580883523872, guid: e24977167aac89544a86d0635b40fc40, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 7460491580883523872, guid: e24977167aac89544a86d0635b40fc40, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.872
       objectReference: {fileID: 0}
     - target: {fileID: 7460491580883523872, guid: e24977167aac89544a86d0635b40fc40, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7460491580883523872, guid: e24977167aac89544a86d0635b40fc40, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -2.9335709
       objectReference: {fileID: 0}
     - target: {fileID: 7460491580883523872, guid: e24977167aac89544a86d0635b40fc40, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 7460491580883523872, guid: e24977167aac89544a86d0635b40fc40, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 7460491580883523872, guid: e24977167aac89544a86d0635b40fc40, type: 3}
       propertyPath: m_LocalRotation.y
@@ -41,7 +45,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7460491580883523872, guid: e24977167aac89544a86d0635b40fc40, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 7460491580883523872, guid: e24977167aac89544a86d0635b40fc40, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -53,7 +57,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7460491580883523879, guid: e24977167aac89544a86d0635b40fc40, type: 3}
       propertyPath: m_Name
-      value: Wall
+      value: Wall Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e24977167aac89544a86d0635b40fc40, type: 3}
+--- !u!1 &7896022940545904257 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7460491580883523879, guid: e24977167aac89544a86d0635b40fc40, type: 3}
+  m_PrefabInstance: {fileID: 728653602641950630}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1252375968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7896022940545904257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb711cf57789f974ba6ae15e61bb58f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hueMin: 0
+  hueMax: 1
+  saturationMin: 0.5
+  saturationMax: 0.75
+  valueMin: 0.5
+  valueMax: 1
+  alphaMin: 0
+  alphaMax: 0.5

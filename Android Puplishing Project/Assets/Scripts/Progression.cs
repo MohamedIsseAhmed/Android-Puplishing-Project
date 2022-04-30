@@ -21,10 +21,7 @@ public class Progression : MonoBehaviour,ISavable
     [SerializeField] private Text newScore;
     int n_score;
 
-    private void Awake()
-    {
-        
-    }
+    
     private void OnEnable()
     {
         //SavingAndLoading.InitializeValuesEvent += SavingAndLoading_InitializeValuesEvent;
@@ -53,10 +50,37 @@ public class Progression : MonoBehaviour,ISavable
         };
 
     }
+    bool test;
     private void Update()
     {
         UpdateLevelTexts();
+        if(Input.touches.Length > 0)
+        {
+            print(Input.touches[0].position);
+            //if (Input.touches[0].phase == TouchPhase.Began)
+            //{
+            //    print("touch begins");
+            //}
+            //if (Input.touches[0].phase == TouchPhase.Canceled || Input.touches[0].phase == TouchPhase.Ended)
+            //{
+            //    print("touch ended");
+            //}
+
+        }
+        //if (Input.GetMouseButton(0))
+        //{
+        //    test= true;
+        //}
+        //if (test)
+        //{
+        //    if (Input.GetMouseButton(0))
+        //    {
+        //        print("Dragging");
+        //    }
+        //}
+        //if (Input.GetMouseButtonUp(0)) { test = false; }
     }
+
     public void UpdateLevelTexts()
     {
         currentLevelText.text = LevelManager.Instance.currentLevel.ToString();
