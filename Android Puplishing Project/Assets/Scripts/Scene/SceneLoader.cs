@@ -9,18 +9,22 @@ public class SceneLoader : StaticSingeltonTemplate<SceneLoader>,ISavable
 {
     SavingAndLoading savingAndLoading;
 
-    [SerializeField] private static int currentSceneIndex;
+     private static int currentSceneIndex;
     protected override  void Awake()
     {
-        savingAndLoading = GetComponent<SavingAndLoading>();
+
         base.Awake();
+        savingAndLoading = GetComponent<SavingAndLoading>();     
+      
         savingAndLoading.Load();
 
     }
     private void  Start()
     {
+
         SceneManager.LoadScene(currentSceneIndex);
-      
+        print(currentSceneIndex);
+
     }
     
     
@@ -31,12 +35,38 @@ public class SceneLoader : StaticSingeltonTemplate<SceneLoader>,ISavable
 
     private void MenuManager_LoadNextScene()
     {
+        
         savingAndLoading.Save();
-        SceneManager.LoadScene(currentSceneIndex + 1);
-    }
+        MonetizationManager.instance.Showinterstitial();
+        
 
+    }
+    IEnumerator LoadScene()
+    {
+        yield return new WaitForSeconds(1);
+        MonetizationManager.instance.ShowBannerAd();
+    }
+    private void Update()
+    {
+        if (MonetizationManager.instance.isAddFinished)
+        {
+            print(currentSceneIndex);
+            
+            currentSceneIndex += 1;
+            if (currentSceneIndex > 8)
+            {
+                savingAndLoading.DeleteDataSaved();
+                currentSceneIndex = 0;
+            }
+
+            SceneManager.LoadScene(currentSceneIndex);
+            MonetizationManager.instance.isAddFinished = false;
+        }
+
+    }
     public void ReloadSceneOnFail()
     {
+
         SceneManager.LoadScene(currentSceneIndex);
     }
 
@@ -44,13 +74,14 @@ public class SceneLoader : StaticSingeltonTemplate<SceneLoader>,ISavable
     {
         var sceneIndex=new SceneIndex();
         sceneIndex.index=currentSceneIndex;
-      
+     
         return sceneIndex;
 
     }
 
     public void RestoreState(object state)
     {
+
         var restoredSceneIndex=(SceneIndex)state;
        
         currentSceneIndex =restoredSceneIndex.index+1;

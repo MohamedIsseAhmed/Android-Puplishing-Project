@@ -49,7 +49,7 @@ public class BallManager : MonoBehaviour
 
         PlayerController controller = other.GetComponentInParent<PlayerController>();
         MovingBallToTarget(other, controller);
-
+     
     }
 
 
@@ -78,16 +78,17 @@ public class BallManager : MonoBehaviour
     {
         if (controller != null)
         {
-            GameManager.Instance.pauseTheGame = true;
+            
             collisonHandler.AllignWithThPlayer();
             Transform objectcollidedwith = null;
             if (CollisonHandler.Instance.GetCollectedObjects.Contains(other.transform))
             {
+                GameManager.Instance.pauseTheGame = true;
                 int indexOfCurrentCollidedBall = CollisonHandler.Instance.GetCollectedObjects.IndexOf(other.transform);
                 for (byte i = 0; i < data.courts.Count; i++)
                 {
                     balls.Add(CollisonHandler.Instance.GetCollectedObjects[indexOfCurrentCollidedBall]);
-                    indexOfCurrentCollidedBall--;
+                   
                 }
                 objectcollidedwith = other.transform;
                 CollisonHandler.Instance.GetCollectedObjects.Remove(other.transform);
@@ -98,6 +99,10 @@ public class BallManager : MonoBehaviour
                 CheckÝfplayerChildCount?.Invoke();
             }
 
+        }
+        else
+        {
+            print("it is null");
         }
     }
 

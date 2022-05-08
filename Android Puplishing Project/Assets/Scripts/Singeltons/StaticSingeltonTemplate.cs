@@ -13,12 +13,13 @@ public class StaticSingeltonTemplate<T> :MonoBehaviour where T : MonoBehaviour
         if(Instance == null)
         {
             Instance = this as T;
-            DontDestroyOnLoad(gameObject);
+          
         }
-        else
+        else if(Instance!=null)
         {
             Destroy(gameObject);
         }
+        DontDestroyOnLoad(gameObject);
     }
    
 }

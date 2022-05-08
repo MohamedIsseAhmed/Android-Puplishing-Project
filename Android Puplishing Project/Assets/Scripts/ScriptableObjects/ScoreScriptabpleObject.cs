@@ -9,7 +9,7 @@ public class ScoreScriptabpleObject : ScriptableObject
     [SerializeField] private int currentScore = 0;
     public int CurrentScore { get { return currentScore; } set { currentScore = value; } }
     //[SerializeField] private int nextScore = 0;
-     
+    public int acumulatedScor;
     [System.NonSerialized]
     public UnityEvent<int> ScoreEvent;
 
@@ -20,11 +20,17 @@ public class ScoreScriptabpleObject : ScriptableObject
             ScoreEvent=new UnityEvent<int>();
             
         }
+        
     }
+
+    public void SetScore()
+    {
+        acumulatedScor = currentScore;
+    }
+
     public void IncreaseScore(int score)
     {
         currentScore+=score;
-        
         ScoreEvent.Invoke(currentScore);
     }
 

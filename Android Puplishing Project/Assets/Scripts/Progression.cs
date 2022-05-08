@@ -92,7 +92,7 @@ public class Progression : MonoBehaviour,ISavable
     {
         
         var scoreData=(ScoreData)state;
-        scoreScriptabpleObject.CurrentScore=scoreData.score+3;
+        scoreScriptabpleObject.CurrentScore=scoreData.score;
         n_score=scoreData.score+3;
     }
 

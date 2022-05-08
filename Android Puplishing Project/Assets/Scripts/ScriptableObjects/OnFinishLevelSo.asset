@@ -15,3 +15,36 @@ MonoBehaviour:
   FinishCourtsParent: {fileID: 5749027816058088451, guid: 68e9e3690b8ad95468f75c6a5ffce36c, type: 3}
   waitTime: 2
   lerpSpeed: 3
+  animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.09477517
+      value: 0.0033406615
+      inSlope: 0.6080591
+      outSlope: 0.6080591
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 4.9515405
+      value: 3.071799
+      inSlope: -0.003463924
+      outSlope: -0.003463924
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 9.987933
+      value: -0.025516808
+      inSlope: -0.61498696
+      outSlope: -0.61498696
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

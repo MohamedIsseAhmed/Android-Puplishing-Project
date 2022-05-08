@@ -1,13 +1,16 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject levelComplatedPanel;
     [SerializeField] private GameObject failedPanel;
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private ScoreScriptabpleObject score;
+    [SerializeField] private float scoreLerp;
+
     private WaitForSeconds wait =new WaitForSeconds(2);
 
     public static event Action LoadNextScene;
@@ -27,6 +30,11 @@ public class MenuManager : MonoBehaviour
     private void OnFailed()
     {
        failedPanel.SetActive(true);
+      
+    }
+    private void Update()
+    {
+        //;
        
     }
     private void OnLevelComplated ()
@@ -39,6 +47,8 @@ public class MenuManager : MonoBehaviour
     {
         GameManager.Instance.LevelComplated = true;
         levelComplatedPanel.SetActive(true);
+       
+      
         yield return wait;
         LoadNextScene?.Invoke();
 

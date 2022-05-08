@@ -17,15 +17,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7460491580883523872, guid: e24977167aac89544a86d0635b40fc40, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.872
+      value: -4.43
       objectReference: {fileID: 0}
     - target: {fileID: 7460491580883523872, guid: e24977167aac89544a86d0635b40fc40, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: -1.047
       objectReference: {fileID: 0}
     - target: {fileID: 7460491580883523872, guid: e24977167aac89544a86d0635b40fc40, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.9335709
+      value: 6.48
       objectReference: {fileID: 0}
     - target: {fileID: 7460491580883523872, guid: e24977167aac89544a86d0635b40fc40, type: 3}
       propertyPath: m_LocalRotation.w
@@ -57,7 +57,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7460491580883523879, guid: e24977167aac89544a86d0635b40fc40, type: 3}
       propertyPath: m_Name
-      value: Wall Variant
+      value: Wall Variant (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e24977167aac89544a86d0635b40fc40, type: 3}

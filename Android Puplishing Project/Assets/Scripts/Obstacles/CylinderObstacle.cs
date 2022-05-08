@@ -29,11 +29,7 @@ public class CylinderObstacle : ObstacleBase
         waitTime = _waitTime;
         lerpTime = _lerpTime;
         distanceToPoints = _distanceToPoint;
-        //for (int i = 0; i < _paths.Length; i++)
-        //{
-        //    print(i.ToString());
-        //    paths[i] = _paths[i].position;
-        //}
+       
         paths = _paths;
         base.Start();
       

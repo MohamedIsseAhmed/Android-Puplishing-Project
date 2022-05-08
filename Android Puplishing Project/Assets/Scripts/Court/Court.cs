@@ -20,7 +20,7 @@ public class Court : MonoBehaviour
     {
         goalParticle.SetActive(true);
         StartCoroutine(DeactivateParentObject(other.transform));
-        Score?.Invoke(0);
+       // Score?.Invoke(0);
         scoreScriptabpleObject.IncreaseScore(1);
     }
     IEnumerator DeactivateParentObject(Transform ball)

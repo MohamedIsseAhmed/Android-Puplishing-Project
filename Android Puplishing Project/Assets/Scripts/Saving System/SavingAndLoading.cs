@@ -7,7 +7,7 @@ using System;
 public class SavingAndLoading : MonoBehaviour
 {
     //private string path => $"{Application.persistentDataPath} / sav.";
-    private string saveFilePath = "sav.";
+    private string saveFilePath = "sav";
 
     public static event Action InitializeValuesEvent;
     public void Save()
@@ -22,20 +22,7 @@ public class SavingAndLoading : MonoBehaviour
         var state = LoadFile();
         RestoreState(state);
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            print("saved");
-            Save();
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            print("Loaded");
-            Load();
-        }
-        if(Input.GetKeyDown(KeyCode.D)) { File.Delete(GetPathSaveFile(saveFilePath));}
-    }
+   
 
     private void SaveFile(object state)
     {
@@ -51,7 +38,7 @@ public class SavingAndLoading : MonoBehaviour
         string saveFile = GetPathSaveFile(saveFilePath);
         if (!File.Exists(saveFile))
         {
-          
+           
             InitializeValuesEvent?.Invoke();
           
             return new Dictionary<string, object>();
@@ -71,22 +58,32 @@ public class SavingAndLoading : MonoBehaviour
     }
     private void CaptureState(Dictionary<string ,object> state)
     {
-
-        foreach (var savable in FindObjectsOfType<SavableEntity>())
-        {
-            state[savable.ID] = savable.CaptureState();
-        }
-    }
-    private void RestoreState(Dictionary<string, object> state)
-    {
+        
         
         foreach (var savable in FindObjectsOfType<SavableEntity>())
         {
-           if(state.TryGetValue(savable.ID, out object value))
-            {
+         
+            state[savable.ID] = savable.CaptureState();
+           
+        }
+     
+    }
+    private void RestoreState(Dictionary<string, object> state)
+    {
+       
+        foreach (var savable in FindObjectsOfType<SavableEntity>())
+        {
+           
+            if (state.TryGetValue(savable.ID, out object value))
+            { 
                 savable.RestoreState(value);
             }
+         
         }
-
+        
+    }
+    public void DeleteDataSaved()
+    {
+        File.Delete(GetPathSaveFile(saveFilePath));
     }
 }

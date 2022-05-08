@@ -14,6 +14,7 @@ public class SavableEntity : MonoBehaviour
     }
     public object CaptureState()
     {
+        
         Dictionary<string, object> data = new Dictionary<string, object>();
        
         foreach(var savable in GetComponents<ISavable>())
@@ -24,6 +25,7 @@ public class SavableEntity : MonoBehaviour
     }
     public void RestoreState(object state)
     {
+       
         var data = (Dictionary<string, object>)(state);
         foreach(var savable in GetComponents<ISavable>())
         {

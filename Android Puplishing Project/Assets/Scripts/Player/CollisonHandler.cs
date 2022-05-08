@@ -6,6 +6,10 @@ public class CollisonHandler : Singelton<CollisonHandler>
 {
     [SerializeField] private float lerpSpeed = 10f;
     [SerializeField] private float alligningSpeed = 10f;
+    [SerializeField] private float timeToWaiteToScale = 0.2f;
+    [SerializeField] private float yTarget = 0.2f;
+     [SerializeField] float zOffset = 5;
+     [SerializeField] float scleModifier = 1.3f;
     [SerializeField] private List<Transform> collectedObject = new List<Transform>();
     public List<Transform> GetCollectedObjects { get { return collectedObject; } }
 
@@ -39,31 +43,26 @@ public class CollisonHandler : Singelton<CollisonHandler>
     IEnumerator ScallingAndSnappingObjects()
     {
 
-        float zOffset = 1;
-        for (byte i = 1; i <= collectedObject.Count - 1; i++)
+
+        for (byte i = 1; i <= collectedObject.Count-1; i++)
         {
 
-            if (i == 1)
-            {
-                collectedObject[i].transform.localPosition =
-                    new Vector3(transform.position.x, collectedObject[i].localPosition.y, transform.position.z + zOffset);
-            }
-
+           
             collectedObject[i].transform.localPosition =
-                new Vector3(collectedObject[i - 1].localPosition.x, collectedObject[i].localPosition.y, collectedObject[i - 1].localPosition.z + zOffset);
+                new Vector3(collectedObject[i - 1].localPosition.x, yTarget, collectedObject[i - 1].localPosition.z + zOffset);
 
-            // yield return new WaitForSeconds(0.3f);
+             yield return new WaitForSeconds(timeToWaiteToScale);
            
         }
-        yield return StartCoroutine(ScallingObjects());
-        yield return StartCoroutine(DeScallingObjects());
+        StartCoroutine(ScallingObjects());
+        StartCoroutine(DeScallingObjects());
 
     }
     IEnumerator ScallingObjects()
     {
-        for (byte i = 1; i <= collectedObject.Count - 1; i++)
+        for (byte i = 1; i <= collectedObject.Count-1; i++)
         {
-            collectedObject[i].transform.localScale = collectedObject[i].transform.localScale * 1.3f;
+            collectedObject[i].transform.localScale = collectedObject[i].transform.localScale * scleModifier;
             yield return null;
         }
     }
@@ -71,7 +70,7 @@ public class CollisonHandler : Singelton<CollisonHandler>
     {
         for (byte i = 1; i <= collectedObject.Count - 1; i++)
         {
-            collectedObject[i].transform.localScale = collectedObject[i].transform.localScale / 1.3f;
+            collectedObject[i].transform.localScale = collectedObject[i].transform.localScale / scleModifier;
             yield return null;
         }
     }
@@ -84,11 +83,11 @@ public class CollisonHandler : Singelton<CollisonHandler>
 
 
                 Vector3 desiredPosition =
-                     new Vector3(collectedObject[i - 1].localPosition.x, collectedObject[i].localPosition.y, collectedObject[i].localPosition.z);
+                     new Vector3(collectedObject[i - 1].localPosition.x,yTarget, collectedObject[i].localPosition.z);
                 collectedObject[i].transform.localPosition = Vector3.MoveTowards(collectedObject[i].transform.localPosition, desiredPosition, lerpSpeed * Time.deltaTime);
                 yield return new WaitForSeconds(alligningSpeed);
 
-                //yield return null;
+               
             }
         }
         
