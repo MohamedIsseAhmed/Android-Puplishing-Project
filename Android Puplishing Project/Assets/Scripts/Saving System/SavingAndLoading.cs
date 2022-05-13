@@ -1,4 +1,4 @@
-using System.Collections;
+
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
@@ -6,7 +6,7 @@ using System.IO;
 using System;
 public class SavingAndLoading : MonoBehaviour
 {
-    //private string path => $"{Application.persistentDataPath} / sav.";
+  
     private string saveFilePath = "sav";
 
     public static event Action InitializeValuesEvent;
@@ -58,27 +58,21 @@ public class SavingAndLoading : MonoBehaviour
     }
     private void CaptureState(Dictionary<string ,object> state)
     {
-        
-        
+    
         foreach (var savable in FindObjectsOfType<SavableEntity>())
-        {
-         
-            state[savable.ID] = savable.CaptureState();
-           
-        }
-     
+        {         
+            state[savable.ID] = savable.CaptureState();         
+        }    
     }
     private void RestoreState(Dictionary<string, object> state)
     {
-       
         foreach (var savable in FindObjectsOfType<SavableEntity>())
         {
            
             if (state.TryGetValue(savable.ID, out object value))
             { 
                 savable.RestoreState(value);
-            }
-         
+            }       
         }
         
     }

@@ -11,15 +11,16 @@ public class MonetizationManager : MonoBehaviour
     public static MonetizationManager instance;
 
     private string App_Id = "ca-app-pub-1487520234070489~5089508091";
-    private string bannerAdId = "ca-app-pub-3940256099942544/2934735716";
-    private string interstialId = "ca-app-pub-3940256099942544/4411468910";
-    private string rewardedVideoAddID = "ca-app-pub-3940256099942544/1712485313";
+    private string bannerAdId = "ca-app-pub-1487520234070489/3977367285";
+    private string interstialId = "ca-app-pub-1487520234070489/8506008926";
+    private string rewardedVideoAddID = "ca-app-pub-1487520234070489/5688273891";
 
     private BannerView bannerView;
     private InterstitialAd interstitial;
     private RewardedAd rewardedAd;
     public bool isAddFinished;
 
+    public static event Action OnAddFinidhed;
     private void Awake()
     {
         if (instance == null)
@@ -111,7 +112,7 @@ public class MonetizationManager : MonoBehaviour
     public void RequestRewardVideoAd()
     {
         rewardedAd = new RewardedAd(rewardedVideoAddID);
-
+        this.rewardedAd.OnAdClosed += HandleOnAdClosed;
 
         AdRequest request = new AdRequest.Builder().Build();
 
@@ -119,6 +120,7 @@ public class MonetizationManager : MonoBehaviour
     }
     public void ShowVideRewardVideoAdd()
     {
+        RequestRewardVideoAd();
         if (this.rewardedAd.IsLoaded())
         {
             print("Rewarded Ad");
@@ -148,6 +150,8 @@ public class MonetizationManager : MonoBehaviour
         //status.text = "HandleAdClosed event received";
         MonoBehaviour.print("HandleAdClosed event received");
         isAddFinished = true;
+        OnAddFinidhed?.Invoke();
+     
     }
 
     public void HandleOnAdLeavingApplication(object sender, EventArgs args)

@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singelton<GameManager>
 {
-    [SerializeField] private WaitForSeconds waitTime = new WaitForSeconds(1);
+    private WaitForSeconds waitTime = new WaitForSeconds(2);
     [SerializeField] private Transform player;
     public static GameManager instance;
 
@@ -23,8 +23,6 @@ public class GameManager : Singelton<GameManager>
     protected override void Awake()
     {
         base.Awake();
-      
-      
       player = GameObject.FindGameObjectWithTag("Player").transform;
     
     }
@@ -46,12 +44,16 @@ public class GameManager : Singelton<GameManager>
         yield return waitTime;
         if (player.transform.childCount == 0)
         {
+            
             OnFailed?.Invoke();
             failed = true;
             yield break;
         }
     }
-
+    IEnumerator CheckPlayerChilds()
+    {
+        yield return new WaitForSeconds(1);
+    }
     private void OnDisable()
     {
         Court.UnPaueTheGame -= Court_UnPaueTheGame;

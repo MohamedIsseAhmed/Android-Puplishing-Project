@@ -10,8 +10,10 @@ public class SceneLoader : StaticSingeltonTemplate<SceneLoader>,ISavable
     SavingAndLoading savingAndLoading;
 
      private static int currentSceneIndex;
+    private int maxLevelNumber = 8;
     protected override  void Awake()
     {
+        maxLevelNumber = 8;
 
         base.Awake();
         savingAndLoading = GetComponent<SavingAndLoading>();     
@@ -21,25 +23,26 @@ public class SceneLoader : StaticSingeltonTemplate<SceneLoader>,ISavable
     }
     private void  Start()
     {
-
+        if (currentSceneIndex > maxLevelNumber)
+        {
+            savingAndLoading.DeleteDataSaved();
+            currentSceneIndex = 0;
+        }
         SceneManager.LoadScene(currentSceneIndex);
-        print(currentSceneIndex);
+      
 
     }
     
     
     private void OnEnable()
     {
-        MenuManager.LoadNextScene += MenuManager_LoadNextScene;
+        MenuManager.LoadNextSceneEvent += MenuManager_LoadNextScene;
     }
 
     private void MenuManager_LoadNextScene()
     {
-        
-        savingAndLoading.Save();
-        MonetizationManager.instance.Showinterstitial();
-        
-
+       savingAndLoading.Save();
+      
     }
     IEnumerator LoadScene()
     {
@@ -50,10 +53,9 @@ public class SceneLoader : StaticSingeltonTemplate<SceneLoader>,ISavable
     {
         if (MonetizationManager.instance.isAddFinished)
         {
-            print(currentSceneIndex);
-            
+          
             currentSceneIndex += 1;
-            if (currentSceneIndex > 8)
+            if (currentSceneIndex > maxLevelNumber)
             {
                 savingAndLoading.DeleteDataSaved();
                 currentSceneIndex = 0;
@@ -64,9 +66,12 @@ public class SceneLoader : StaticSingeltonTemplate<SceneLoader>,ISavable
         }
 
     }
+    public void LoadAdd()
+    {
+        MonetizationManager.instance.Showinterstitial();
+    }
     public void ReloadSceneOnFail()
     {
-
         SceneManager.LoadScene(currentSceneIndex);
     }
 

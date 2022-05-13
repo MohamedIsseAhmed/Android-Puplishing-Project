@@ -9,14 +9,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class LevelManager : StaticSingeltonTemplate<LevelManager>,ISavable
 {
-    //[SerializeField] private float currentLevel;
-    //[SerializeField] private float nextLevel;
-    //[SerializeField] private float totalLevel;
-
-    //[SerializeField] private RawImage fillImage;
-    //[SerializeField] private Text currentLevelText;
-    //[SerializeField] private Text nexttLevelText;
-
+  
     [SerializeField] Progression progression;
 
     public int currentLevel;
@@ -27,10 +20,7 @@ public class LevelManager : StaticSingeltonTemplate<LevelManager>,ISavable
       
         
     }
-    private void Start()
-    {
-        
-    }
+  
     private void Update()
     {      
         float ratio= progression.CurrentLevel / progression.TotalLevel;
@@ -51,15 +41,11 @@ public class LevelManager : StaticSingeltonTemplate<LevelManager>,ISavable
         progression.currentLevelText.text = progression.CurrentLevel.ToString();
         progression.nexttLevelText.text = progression.NextLevel.ToString();
         progression.fillImage.rectTransform.localScale = Vector3.zero;
-        StartCoroutine(LoadAndSaveWithDelay());
+        
     }
-    IEnumerator LoadAndSaveWithDelay()
+    private void OnDisable()
     {
-        yield return new WaitForSeconds(5);
-        //FindObjectOfType<SavingAndLoading>().Load();
-        yield return new WaitForSeconds(1);
-        //FindObjectOfType<SavingAndLoading>().Save();
-
+        SavingAndLoading.InitializeValuesEvent -= SavingAndLoading_InitializeValuesEvent;
     }
     public object CaptureState()
     {
@@ -80,7 +66,7 @@ public class LevelManager : StaticSingeltonTemplate<LevelManager>,ISavable
 
         currentLevel = restoredStateData.currentLevel + 1;
         nextLevel= restoredStateData.nexttLevel+1;
-      
+       
     }
 
     [System.Serializable]

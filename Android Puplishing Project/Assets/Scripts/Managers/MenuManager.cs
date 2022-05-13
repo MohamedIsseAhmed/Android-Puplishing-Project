@@ -11,17 +11,17 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private ScoreScriptabpleObject score;
     [SerializeField] private float scoreLerp;
 
-    private WaitForSeconds wait =new WaitForSeconds(2);
+    private WaitForSeconds wait =new WaitForSeconds(1);
 
-    public static event Action LoadNextScene;
+    public static event Action LoadNextSceneEvent;
     private void OnEnable()
     {
        
         GameManager.OnFailed += OnFailed;
         LevelComplatedSo.OnlevelComplated += OnLevelComplated;
+       
     }
 
-   
     private void OnDisable()
     {
         GameManager.OnFailed -= OnFailed;
@@ -29,28 +29,21 @@ public class MenuManager : MonoBehaviour
     }
     private void OnFailed()
     {
-       failedPanel.SetActive(true);
+       failedPanel.SetActive(true);     
+    }
       
-    }
-    private void Update()
-    {
-        //;
-       
-    }
     private void OnLevelComplated ()
     {
-        //GameManager.Instance.LevelComplated = true;
-        //levelComplatedPanel.SetActive(true);
         StartCoroutine(LevelComplatedDelay());
     }
     IEnumerator LevelComplatedDelay()
     {
+        
         GameManager.Instance.LevelComplated = true;
         levelComplatedPanel.SetActive(true);
        
-      
         yield return wait;
-        LoadNextScene?.Invoke();
+        LoadNextSceneEvent?.Invoke();
 
 
     }

@@ -31,10 +31,7 @@ public class PlayerController : MonoBehaviour
        rigidbody = GetComponent<Rigidbody>();
        
     }
-    private void Start()
-    {
-       
-    }
+ 
     void Update()
     {
         if (GameManager.Instance.Failed) return;

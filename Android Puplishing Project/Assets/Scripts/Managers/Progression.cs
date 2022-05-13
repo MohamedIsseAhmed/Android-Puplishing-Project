@@ -20,65 +20,29 @@ public class Progression : MonoBehaviour,ISavable
 
     [SerializeField] private Text newScore;
     int n_score;
-
-    
     private void OnEnable()
-    {
-        //SavingAndLoading.InitializeValuesEvent += SavingAndLoading_InitializeValuesEvent;
+    {       
         scoreScriptabpleObject.ScoreEvent.AddListener(UpdateScore);
         scoreText.text = "Score:" +scoreScriptabpleObject.CurrentScore;
-    }
-    
+    }   
     private void OnDisable()
     {
-        scoreScriptabpleObject.ScoreEvent.RemoveListener(UpdateScore);
-        
-    }
-
-  
+        scoreScriptabpleObject.ScoreEvent.RemoveListener(UpdateScore);        
+    } 
     public void UpdateScore(int _score)
     {
         scoreText.text = "Score:" +_score.ToString();
     }
     public object CaptureState()
-    {
-       
+    {     
         return new ScoreData
         {
-            score = scoreScriptabpleObject.CurrentScore
-          
+            score = scoreScriptabpleObject.CurrentScore          
         };
-
-    }
-    bool test;
+    }  
     private void Update()
     {
         UpdateLevelTexts();
-        if(Input.touches.Length > 0)
-        {
-            print(Input.touches[0].position);
-            //if (Input.touches[0].phase == TouchPhase.Began)
-            //{
-            //    print("touch begins");
-            //}
-            //if (Input.touches[0].phase == TouchPhase.Canceled || Input.touches[0].phase == TouchPhase.Ended)
-            //{
-            //    print("touch ended");
-            //}
-
-        }
-        //if (Input.GetMouseButton(0))
-        //{
-        //    test= true;
-        //}
-        //if (test)
-        //{
-        //    if (Input.GetMouseButton(0))
-        //    {
-        //        print("Dragging");
-        //    }
-        //}
-        //if (Input.GetMouseButtonUp(0)) { test = false; }
     }
 
     public void UpdateLevelTexts()
@@ -89,11 +53,10 @@ public class Progression : MonoBehaviour,ISavable
         fillImage.rectTransform.localScale = new Vector3(ratio, 1, 1);
     }
     public void RestoreState(object state)
-    {
-        
+    {        
         var scoreData=(ScoreData)state;
         scoreScriptabpleObject.CurrentScore=scoreData.score;
-        n_score=scoreData.score+3;
+        n_score=scoreData.score;
     }
 
     [System.Serializable]

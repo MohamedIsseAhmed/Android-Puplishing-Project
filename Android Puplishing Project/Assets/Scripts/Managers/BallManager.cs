@@ -20,6 +20,7 @@ public class BallManager : MonoBehaviour
 
    [SerializeField] private CollisonHandler collisonHandler;
     private BoxCollider boxCollider;
+    private float yTarget = 4;
     private void Awake()
     {
         boxCollider = GetComponent<BoxCollider>();
@@ -35,7 +36,7 @@ public class BallManager : MonoBehaviour
             if (timer > data.lerpSpeed)
             {
                 timer = data.lerpSpeed;
-                lerpOffset.y = 4f;
+                lerpOffset.y = yTarget;
             }
             lerpRatio = timer / data.lerpSpeed;
 
@@ -55,21 +56,17 @@ public class BallManager : MonoBehaviour
 
     private void MoveTheBall(Transform ball)
     {
-        ball.parent = null;
-       
+        ball.parent = null;   
     }
 
     IEnumerator MovetToTarget()
-    {
-     
+    {    
         for (byte i = 0; i < balls.Count; i++)
         {
             balls[i].transform.position = Vector3.MoveTowards(balls[i].transform.position, data.courts[i].position, data.lerpSpeed * Time.deltaTime)+lerpOffset;
             yield return new WaitForSeconds(data.waitTime);
 
         }
-       
-       
         yield return null;
         
     }
@@ -100,10 +97,7 @@ public class BallManager : MonoBehaviour
             }
 
         }
-        else
-        {
-            print("it is null");
-        }
+      
     }
 
     [System.Serializable]
